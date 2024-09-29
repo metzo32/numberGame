@@ -6,7 +6,7 @@
 //   strongBg: "#40528d",
 //   extraBg: "#262d45",
 //   white: "#FFFFFF",
-//   shadow: "#000000",
+//   shadow: "#000000", 
 // };
 
 export const Colors = {

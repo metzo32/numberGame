@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
 import { Colors } from "../constants/colors";
 
 interface StartGameProps {
   onPickedNumber: (pickedNumber: number) => void;
 }
 
-export default function StartGameScreen(props: StartGameProps) {
+export default function StartGameScreen({ onPickedNumber }: StartGameProps) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
   const numberInputHandler = (inputText: string) => {
@@ -37,7 +37,7 @@ export default function StartGameScreen(props: StartGameProps) {
         { text: "확인", style: "destructive", onPress: resetInputHandler },
       ]);
     } else {
-      props.onPickedNumber(chosenNumber)
+      onPickedNumber(chosenNumber); //부모 컴포넌트에 입력값 전달
     }
   };
 

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import { Colors } from "../constants/colors";
+import { Colors } from "../../constants/colors";
 
 interface propsType {
   children: string;
@@ -16,7 +16,7 @@ export default function PrimaryButton({ children, onPress }: propsType) {
         ) =>
           pressed
             ? [styles.pressed, styles.innerContainer]
-            : styles.innerContainer
+            : [styles.innerContainer]
         }
         onPress={onPress}
         android_ripple={{ color: Colors.p400 }}
