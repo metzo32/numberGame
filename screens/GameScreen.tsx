@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, Alert } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import Titles from "../components/ui/Titles";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -91,15 +92,13 @@ export default function GameScreen({
       <Cards>
         <InstructionText>Higher or Lower?</InstructionText>
         <ButtonContainer>
-      
-            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              -
-            </PrimaryButton>
-       
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
-            +
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+            <Ionicons name="remove-outline" size={24} color="white"/>
           </PrimaryButton>
-   
+
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+          <Ionicons name="add-outline" size={24} color="white"/>
+          </PrimaryButton>
         </ButtonContainer>
       </Cards>
       <InstructionText>Log Rounds</InstructionText>
@@ -115,5 +114,5 @@ const styles = StyleSheet.create({
 
   buttonBox: {
     flex: 1,
-  }
+  },
 });
