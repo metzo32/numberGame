@@ -1,6 +1,10 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
+import { StyleSheet, View, TextInput, Alert } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Titles from "../components/ui/Titles";
+import Cards from "../components/ui/Cards";
+import InstructionText from "../components/ui/InstructionText";
+import ButtonContainer from "../components/ui/ButtonContainer";
 import { Colors } from "../constants/colors";
 
 interface StartGameProps {
@@ -46,32 +50,42 @@ export default function StartGameScreen({ onPickedNumber }: StartGameProps) {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad" //숫자만
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredNumber}
-        onChangeText={numberInputHandler}
-      />
-      <View style={styles.buttonContainer}>
-        <View style={styles.buttonBox}>
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-        </View>
-        <View style={styles.buttonBox}>
-          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-        </View>
-      </View>
+    <View style={styles.rootContainer}>
+      <Titles>Guess My Number</Titles>
+
+      <Cards>
+        <InstructionText>Enter a number</InstructionText>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad" //숫자만
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={enteredNumber}
+          onChangeText={numberInputHandler}
+        />
+        <ButtonContainer>
+  
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+   
+            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+    
+        </ButtonContainer>
+      </Cards>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    marginTop: 100,
+    alignItems: "center",
+  },
+
   inputContainer: {
     backgroundColor: Colors.p300,
-    marginTop: 100,
+    marginTop: 36,
     marginHorizontal: 24,
     padding: 16,
     alignItems: "center",
@@ -81,11 +95,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 3, height: 6 },
     shadowRadius: 6,
     shadowOpacity: 0.2,
-  },
-
-  buttonContainer: {
-    flexDirection: "row",
-    marginTop: 20,
   },
 
   buttonBox: {

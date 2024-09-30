@@ -7,27 +7,35 @@ interface propsType {
 }
 
 export default function PrimaryButton({ children, onPress }: propsType) {
-
   return (
-    <View style={styles.outerContainer}>
-      <Pressable
-        style={(
-          { pressed } //53강 참고
-        ) =>
-          pressed
-            ? [styles.pressed, styles.innerContainer]
-            : [styles.innerContainer]
-        }
-        onPress={onPress}
-        android_ripple={{ color: Colors.p400 }}
-      >
-        <Text style={styles.buttonText}>{children}</Text>
-      </Pressable>
+
+      <View style={styles.buttonWrapper}>
+      <View style={styles.outerContainer}>
+        <Pressable
+          style={(
+            { pressed } //53강 참고
+          ) =>
+            pressed
+              ? [styles.pressed, styles.innerContainer]
+              : [styles.innerContainer]
+          }
+          onPress={onPress}
+          android_ripple={{ color: Colors.p400 }}
+        >
+          <Text style={styles.buttonText}>{children}</Text>
+        </Pressable>
+
+    </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+
+  buttonWrapper: {
+    flex: 1,
+  },
+
   outerContainer: {
     borderRadius: 100,
     margin: 4,
@@ -49,4 +57,5 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.75,
   },
+
 });

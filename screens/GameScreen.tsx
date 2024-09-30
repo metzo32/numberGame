@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import Titles from "../components/ui/Titles";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import InstructionText from "../components/ui/InstructionText";
+import Cards from "../components/ui/Cards";
+import ButtonContainer from "../components/ui/ButtonContainer";
 
 interface GameScreenProps {
   userNumber: number;
@@ -20,7 +23,6 @@ const generateNumBetween = (
   if (randomNum === exclude) {
     return generateNumBetween(min, max, exclude);
   } else {
-
     return randomNum;
   }
 };
@@ -31,7 +33,6 @@ export default function GameScreen({
   userNumber,
   onGameOver,
 }: GameScreenProps) {
-  
   // 아래는 게임오버 화면 넘어가지 않는 원인
   // const initialGuess = generateNumBetween(minBoundary, maxBoundary, userNumber);
 
@@ -48,7 +49,7 @@ export default function GameScreen({
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver();
-      console.log(minBoundary,maxBoundary)
+      console.log(minBoundary, maxBoundary);
     }
   }, [currentGuess, userNumber, onGameOver]); //67강 참고
 
@@ -87,18 +88,21 @@ export default function GameScreen({
 
       <NumberContainer>{currentGuess}</NumberContainer>
 
-      <View>
-        <Text>Higher or Lower?</Text>
-        <View>
-          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-            -
-          </PrimaryButton>
+      <Cards>
+        <InstructionText>Higher or Lower?</InstructionText>
+        <ButtonContainer>
+      
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+              -
+            </PrimaryButton>
+       
           <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
             +
           </PrimaryButton>
-        </View>
-      </View>
-      <Text>Log Rounds</Text>
+   
+        </ButtonContainer>
+      </Cards>
+      <InstructionText>Log Rounds</InstructionText>
     </View>
   );
 }
@@ -108,4 +112,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
   },
+
+  buttonBox: {
+    flex: 1,
+  }
 });
