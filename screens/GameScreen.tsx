@@ -18,34 +18,37 @@ const generateNumBetween = (
 
   //컴퓨터는 첫 시도에서 답을 맞출 수 없음.
   if (randomNum === exclude) {
-    //생성된 숫자가 제외되야하는 정수와 같다면 다시 생성
     return generateNumBetween(min, max, exclude);
   } else {
+
     return randomNum;
   }
 };
-
 let minBoundary = 1;
 let maxBoundary = 100;
 
-export default function GameScreen({ userNumber, onGameOver }: GameScreenProps) {
-  // 게임오버 화면 넘어가지 않는 원인
-  // const initialGuess = generateNumBetween(minBoundary, maxBoundary, userNumber);  
+export default function GameScreen({
+  userNumber,
+  onGameOver,
+}: GameScreenProps) {
+  
+  // 아래는 게임오버 화면 넘어가지 않는 원인
+  // const initialGuess = generateNumBetween(minBoundary, maxBoundary, userNumber);
 
   //GameScreen이 실행될 때마다  실행될 함수. guessNumber가 생길 때마다 다시 실행된다.
   //문제는 minBoundary와 maxBoundary가 똑같은 상황에서도 실행된다.
   //아래 useEffect문은 이 함수가 실행되고 난 다음 실행되기 때문에 리렌더링이 발생했을 때 이 함수가 먼저 호출된다.
   //따라서 gameOver 화면으로 넘어가기도 전에 에러가 발생한다.
 
-  const initialGuess = generateNumBetween(1, 100, userNumber);  
+  const initialGuess = generateNumBetween(1, 100, userNumber);
   //해결방법은 이 minBoundary와 maxBoundary를 하드코딩 해버리는 것. --- 초기값은 어차피 한번만 쓰기 때문에.
-
 
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      onGameOver()
+      onGameOver();
+      console.log(minBoundary,maxBoundary)
     }
   }, [currentGuess, userNumber, onGameOver]); //67강 참고
 
@@ -68,6 +71,7 @@ export default function GameScreen({ userNumber, onGameOver }: GameScreenProps) 
       minBoundary = currentGuess + 1; //66강 참고
     }
     console.log(minBoundary, maxBoundary);
+
     const newRandomNum = generateNumBetween(
       minBoundary,
       maxBoundary,
