@@ -16,23 +16,27 @@ export default function App() {
     setGameOver(false);
   };
 
-  const gameOverHandler = () => {
+  //게임 오버 시 불러오는 콜백함수
+  const gameOverHandler = (numberOfRounds: number) => {
     setGameOver(true);
+    setRounds(numberOfRounds) //게임오버 시 라운드의 수
   };
 
   const restartHandler = () => {
     //상태값 모두 초기화 (setGameOver는 위 핸들러에서 다루니 생략)
     setUserNumber(null);  //falsy가 됐으므로 아래 if (gameOver && userNumber) { 문을 불만족하여 <<GameScreen/> 렌더링
-    setRounds(0);
+    setRounds(0); //다시 시작할때는 라운드 수 0
   };
 
   //화면 전환
   let screen = <StartGameScreen onPickedNumber={pickedNumberHandler} />;
+
   if (userNumber) {
     screen = (
       <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
     );
   }
+  
   if (gameOver && userNumber) {
     // userNumber을 포함시키지 않으면 입력하기도 전인 최초 상태에서 gameOver화면으로 넘어감.
     screen = (

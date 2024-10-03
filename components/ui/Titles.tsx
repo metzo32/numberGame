@@ -11,6 +11,7 @@ export default function Titles({ children }: TitleType) {
 
 const styles = StyleSheet.create({
   title: {
+    maxWidth: "80%",
     fontSize: 16,
     fontWeight: "600",
     color: Colors.white,

@@ -7,10 +7,11 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import InstructionText from "../components/ui/InstructionText";
 import Cards from "../components/ui/Cards";
 import ButtonContainer from "../components/ui/ButtonContainer";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 interface GameScreenProps {
   userNumber: number;
-  onGameOver: () => void;
+  onGameOver: (roundCount: number) => void;
 }
 
 const generateNumBetween = (
@@ -31,6 +32,8 @@ const generateNumBetween = (
 let minBoundary = 1;
 let maxBoundary = 100;
 
+
+
 export default function GameScreen({
   userNumber,
   onGameOver,
@@ -46,11 +49,11 @@ export default function GameScreen({
   const initialGuess = generateNumBetween(1, 100, userNumber);
   //해결방법은 이 minBoundary와 maxBoundary를 하드코딩 해버리는 것. --- 초기값은 어차피 한번만 쓰기 때문에.
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
-  const [rounds, setRounds] = useState([initialGuess]);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      onGameOver();
+      onGameOver(numberOfRounds); //여기서 넘겨준 numberOfRounds App에서 gameOverHandler 콜백함수의 인자로 받는다
     }
   }, [currentGuess, userNumber, onGameOver]); //67강 참고
 
@@ -87,8 +90,10 @@ export default function GameScreen({
     );
 
     setCurrentGuess(newRandomNum);
-    setRounds((prevRound) => [newRandomNum, ...prevRound]);
+    setGuessRounds((prevRound) => [newRandomNum, ...prevRound]);
   };
+
+  const numberOfRounds = guessRounds.length
 
   return (
     <View style={styles.screen}>
@@ -108,14 +113,15 @@ export default function GameScreen({
           </PrimaryButton>
         </ButtonContainer>
       </Cards>
-      <InstructionText>Log Rounds</InstructionText>
-      <View>
-        {rounds.map(rounds => <Text key={rounds}>{rounds}</Text>)}
+
+      <View style={styles.flatContainer}>
+        {/* {rounds.map(rounds => <Text key={rounds}>{rounds}</Text>)} */}
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => <GuessLogItem roundCount={numberOfRounds - itemData.index} guess={itemData.item}/>}
+          keyExtractor={(item) => item.toString()}
+        />
       </View>
-      {/* <FlatList
-        data={roundCount}
-        renderItem={(itemData) => <Text>{itemData.item}</Text>}
-      /> */}
     </View>
   );
 }
@@ -128,5 +134,11 @@ const styles = StyleSheet.create({
 
   buttonBox: {
     flex: 1,
+  },
+
+  flatContainer: {
+    flex: 1,
+    marginTop: 36,
+    paddingHorizontal: 16,
   },
 });
