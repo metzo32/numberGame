@@ -47,11 +47,14 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 2,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   buttonText: {
     color: Colors.white,
     textAlign: "center",
+    lineHeight: 20,
   },
 
   pressed: {
