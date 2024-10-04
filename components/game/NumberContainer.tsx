@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 import { Colors } from "../../constants/colors";
 
 interface NumberContainerProps {
@@ -14,19 +13,22 @@ export default function NumberContainer({ children }: NumberContainerProps) {
   );
 }
 
+//screen: 상태바 포함, window: 상태바 제외
+const DeviceWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
   container: {
     borderWidth: 4,
     borderColor: Colors.p500,
     borderRadius: 8,
-    padding: 24,
-    margin: 24,
+    padding: DeviceWidth < 380 ? 12 : 24,
+    margin: DeviceWidth < 380 ? 36 : 52,
     justifyContent: "center",
     alignContent: "center",
   },
   numberText: {
     color: Colors.p500,
-    fontSize: 36,
+    fontSize: DeviceWidth < 380 ? 28 : 36,
     fontWeight: "600",
     textAlign: "center",
   },

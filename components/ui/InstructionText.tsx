@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import { CustomTextMedium } from "../../components/ui/TextFont";
 import { Colors } from "../../constants/colors";
 
 interface InstructionTextProps {
@@ -6,7 +7,7 @@ interface InstructionTextProps {
 }
 
 export default function InstructionText({ children }: InstructionTextProps) {
-  return <Text style={styles.text}>{children}</Text>;
+  return <CustomTextMedium style={styles.text}>{children}</CustomTextMedium>;
 }
 
 const styles = StyleSheet.create({

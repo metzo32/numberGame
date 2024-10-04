@@ -51,6 +51,7 @@ export default function GameScreen({
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
+  //78강 참고
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver(numberOfRounds); //여기서 넘겨준 numberOfRounds App에서 gameOverHandler 콜백함수의 인자로 받는다
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 12,
+    alignItems: "center",
   },
 
   buttonBox: {
