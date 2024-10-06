@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.white,
     padding: 12,
-    margin: 0
+    marginBottom: DeviceWidth < 380 ? 24 : 36,
   },
   
 });

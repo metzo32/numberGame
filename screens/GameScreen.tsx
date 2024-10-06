@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Alert, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Alert,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Titles from "../components/ui/Titles";
 import NumberContainer from "../components/game/NumberContainer";
@@ -32,8 +38,6 @@ const generateNumBetween = (
 let minBoundary = 1;
 let maxBoundary = 100;
 
-
-
 export default function GameScreen({
   userNumber,
   onGameOver,
@@ -50,6 +54,7 @@ export default function GameScreen({
   //해결방법은 이 minBoundary와 maxBoundary를 하드코딩 해버리는 것. --- 초기값은 어차피 한번만 쓰기 때문에.
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
+  const { width, height } = useWindowDimensions();
 
   //78강 참고
   useEffect(() => {
@@ -94,32 +99,65 @@ export default function GameScreen({
     setGuessRounds((prevRound) => [newRandomNum, ...prevRound]);
   };
 
-  const numberOfRounds = guessRounds.length
+  const numberOfRounds = guessRounds.length;
 
-  return (
-    <View style={styles.screen}>
-      <Titles>Opponent's Guess</Titles>
-
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
-
+  
       <Cards>
         <InstructionText>Higher or Lower?</InstructionText>
         <ButtonContainer>
           <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
             <Ionicons name="remove-outline" size={24} color="white" />
           </PrimaryButton>
-
+  
           <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
             <Ionicons name="add-outline" size={24} color="white" />
           </PrimaryButton>
         </ButtonContainer>
       </Cards>
+    </>
+  );
+  
+  if (width > 500) {
+    content = (
+      <>
+        <InstructionText>Higher or Lower?</InstructionText>
+        <View>
+          <ButtonContainer>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+              <Ionicons name="remove-outline" size={24} color="white" />
+            </PrimaryButton>
+          </ButtonContainer>
+  
+          <NumberContainer>{currentGuess}</NumberContainer>
+  
+          <ButtonContainer>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+              <Ionicons name="add-outline" size={24} color="white" />
+            </PrimaryButton>
+          </ButtonContainer>
+        </View>
+      </>
+    );
+  }
 
+
+  return (
+    <View style={styles.screen}>
+      <Titles>Opponent's Guess</Titles>
+      {content}
       <View style={styles.flatContainer}>
         {/* {rounds.map(rounds => <Text key={rounds}>{rounds}</Text>)} */}
         <FlatList
           data={guessRounds}
-          renderItem={(itemData) => <GuessLogItem roundCount={numberOfRounds - itemData.index} guess={itemData.item}/>}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              roundCount={numberOfRounds - itemData.index}
+              guess={itemData.item}
+            />
+          )}
           keyExtractor={(item) => item.toString()}
         />
       </View>
@@ -132,10 +170,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
     alignItems: "center",
-  },
-
-  buttonBox: {
-    flex: 1,
   },
 
   flatContainer: {

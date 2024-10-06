@@ -1,5 +1,4 @@
 import { StyleSheet, View } from "react-native";
-import { Colors } from "../../constants/colors";
 
 interface ButtonContainerProps {
   children: React.ReactNode;
