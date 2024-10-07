@@ -21,8 +21,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderWidth: 1,
     borderColor: Colors.white,
+    borderRadius: 6,
     padding: 12,
-    marginBottom: DeviceWidth < 380 ? 24 : 36,
+    marginBottom: DeviceWidth < 380 ? 12 : 24,
   },
   
 });

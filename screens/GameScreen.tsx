@@ -123,8 +123,8 @@ export default function GameScreen({
   if (width > 500) {
     content = (
       <>
-        <InstructionText>Higher or Lower?</InstructionText>
-        <View>
+      
+        <View style={styles.buttonContainerWide}>
           <ButtonContainer>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
               <Ionicons name="remove-outline" size={24} color="white" />
@@ -177,4 +177,11 @@ const styles = StyleSheet.create({
     marginTop: 36,
     paddingHorizontal: 16,
   },
+
+  buttonContainerWide: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  }
 });

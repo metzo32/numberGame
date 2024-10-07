@@ -17,6 +17,7 @@ const DeviceWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   inputContainer: {
+
     backgroundColor: Colors.p300,
     marginHorizontal: 24,
     padding: 16,

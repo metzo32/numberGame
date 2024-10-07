@@ -62,7 +62,7 @@ export default function StartGameScreen({ onPickedNumber }: StartGameProps) {
   const marginTop = height < 380 ? "5%" : "10%";
 
   return (
-    <ScrollView style={styles.screen} >
+    <ScrollView style={styles.screen}>
       <KeyboardAvoidingView style={styles.screen} behavior="position">
         <View style={[styles.rootContainer, { marginTop: marginTop }]}>
           <Titles>Guess My Number</Titles>
@@ -128,5 +128,6 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.white,
     color: Colors.white,
     marginVertical: 8,
+
   },
 });

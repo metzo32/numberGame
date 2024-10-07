@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable,  } from "react-native";
 import { Colors } from "../../constants/colors";
 
 interface propsType {
@@ -8,8 +8,7 @@ interface propsType {
 
 export default function PrimaryButton({ children, onPress }: propsType) {
   return (
-
-      <View style={styles.buttonWrapper}>
+    <View style={styles.buttonWrapper}>
       <View style={styles.outerContainer}>
         <Pressable
           style={(
@@ -24,21 +23,21 @@ export default function PrimaryButton({ children, onPress }: propsType) {
         >
           <Text style={styles.buttonText}>{children}</Text>
         </Pressable>
-
-    </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
   buttonWrapper: {
-    flex: 1,
+flex: 1,
+    height: "auto",
+    marginHorizontal: 16,
   },
 
   outerContainer: {
     borderRadius: 100,
-    margin: 4,
+    marginHorizontal: 4,
     overflow: "hidden",
   },
 
@@ -60,5 +59,4 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.75,
   },
-
 });
