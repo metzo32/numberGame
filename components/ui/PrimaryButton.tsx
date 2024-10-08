@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable,  } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { Colors } from "../../constants/colors";
 
 interface propsType {
@@ -30,14 +30,14 @@ export default function PrimaryButton({ children, onPress }: propsType) {
 
 const styles = StyleSheet.create({
   buttonWrapper: {
-flex: 1,
-    height: "auto",
-    marginHorizontal: 16,
+    flex: 1,
+    marginHorizontal: 4,
+    borderWidth: 1,
+    borderColor: "blue",
   },
 
   outerContainer: {
     borderRadius: 100,
-    marginHorizontal: 4,
     overflow: "hidden",
   },
 

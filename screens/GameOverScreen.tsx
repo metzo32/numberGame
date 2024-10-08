@@ -4,6 +4,7 @@ import {
   Text,
   View,
   Image,
+  ScrollView,
   useWindowDimensions,
 } from "react-native";
 import Titles from "../components/ui/Titles";
@@ -50,45 +51,47 @@ export default function GameOverScreen({
   }, [width, height]);
 
   return (
-    <View style={styles.rootContainer}>
-      <Titles>Game over</Titles>
+    <ScrollView>
+      <View style={styles.rootContainer}>
+        <Titles>Game over</Titles>
 
-      <View style={isPortrait ? styles.portraitWrapper : styles.wideWrapper}>
-        <View
-          style={
-            isPortrait
-              ? styles.portraitImageContainer
-              : styles.wideImageContainer
-          }
-        >
-          <View style={[styles.shadowContainer, imageStyle]}>
-            <View style={[styles.imageContainer, imageStyle]}>
-              <Image
-                source={require("../assets/images/human_lost.webp")}
-                style={styles.image}
-              />
+        <View style={isPortrait ? styles.portraitWrapper : styles.wideWrapper}>
+          <View
+            style={
+              isPortrait
+                ? styles.portraitImageContainer
+                : styles.wideImageContainer
+            }
+          >
+            <View style={[styles.shadowContainer, imageStyle]}>
+              <View style={[styles.imageContainer, imageStyle]}>
+                <Image
+                  source={require("../assets/images/human_lost.webp")}
+                  style={styles.image}
+                />
+              </View>
             </View>
           </View>
-        </View>
 
-        <View
-          style={isPortrait ? styles.portraitContainer : styles.wideContainer}
-        >
-          <Text style={styles.text01}>"인간 시대의 끝이 도래했다"</Text>
+          <View
+            style={isPortrait ? styles.portraitContainer : styles.wideContainer}
+          >
+            <Text style={styles.text01}>"인간 시대의 끝이 도래했다"</Text>
 
-          <Text style={styles.text01}>
-            정답 :<Text style={styles.strong}> {userInput}</Text>
-          </Text>
+            <Text style={styles.text01}>
+              정답 :<Text style={styles.strong}> {userInput}</Text>
+            </Text>
 
-          <Text style={styles.text02}>
-            당신을
-            <Text style={styles.strong}> {roundsNumber}</Text>
-            번만에 이겼습니다!
-          </Text>
-          <PrimaryButton onPress={onRestart}>다시하기</PrimaryButton>
+            <Text style={styles.text02}>
+              당신을
+              <Text style={styles.strong}> {roundsNumber}</Text>
+              번만에 이겼습니다!
+            </Text>
+            <PrimaryButton onPress={onRestart}>다시하기</PrimaryButton>
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

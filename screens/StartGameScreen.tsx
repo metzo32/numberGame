@@ -59,11 +59,11 @@ export default function StartGameScreen({ onPickedNumber }: StartGameProps) {
     setEnteredNumber("");
   };
 
-  const marginTop = height < 380 ? "5%" : "10%";
+  const marginTop = height < width ? "8%" : "10%";
 
   return (
     <ScrollView style={styles.screen}>
-      <KeyboardAvoidingView style={styles.screen} behavior="position">
+      <KeyboardAvoidingView behavior="position">
         <View style={[styles.rootContainer, { marginTop: marginTop }]}>
           <Titles>Guess My Number</Titles>
 
@@ -79,7 +79,6 @@ export default function StartGameScreen({ onPickedNumber }: StartGameProps) {
             />
             <ButtonContainer>
               <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-
               <PrimaryButton onPress={confirmInputHandler}>
                 Confirm
               </PrimaryButton>
@@ -98,7 +97,10 @@ const styles = StyleSheet.create({
 
   rootContainer: {
     flex: 1,
+
     alignItems: "center",
+    // borderWidth: 1,
+    // borderColor: "red",
   },
 
   inputContainer: {
@@ -128,6 +130,5 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.white,
     color: Colors.white,
     marginVertical: 8,
-
   },
 });

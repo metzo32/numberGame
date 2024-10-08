@@ -19,15 +19,14 @@ export default function ButtonContainer({ children }: ButtonContainerProps) {
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-
     marginTop: 20,
+    borderWidth: 1,
+    borderColor: 'red',
   },
 
   wide: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "pink",
+    marginBottom: 12,
   },
 });

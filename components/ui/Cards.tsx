@@ -1,4 +1,4 @@
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, useWindowDimensions } from "react-native";
 import { Colors } from "../../constants/colors";
 
 interface CardProps {
@@ -6,18 +6,16 @@ interface CardProps {
 }
 
 export default function Cards({ children }: CardProps) {
-  return (
-    <View style={styles.inputContainer}>
-      {children}
-    </View>
-  );
+  const { width, height } = useWindowDimensions();
+
+  const isWideView = width > height;
+
+  return <View style={[styles.inputContainer, isWideView &&  styles.inputContainerWide]}>{children}</View>;
 }
 
-const DeviceWidth = Dimensions.get('window').width
-
 const styles = StyleSheet.create({
+  
   inputContainer: {
-
     backgroundColor: Colors.p300,
     marginHorizontal: 24,
     padding: 16,
@@ -28,5 +26,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 3, height: 6 },
     shadowRadius: 6,
     shadowOpacity: 0.2,
+  },
+
+  inputContainerWide : {
+    flex: 1,
   },
 });

@@ -9,10 +9,10 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Titles from "../components/ui/Titles";
 import NumberContainer from "../components/game/NumberContainer";
+import ButtonContainer from "../components/ui/ButtonContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import InstructionText from "../components/ui/InstructionText";
 import Cards from "../components/ui/Cards";
-import ButtonContainer from "../components/ui/ButtonContainer";
 import GuessLogItem from "../components/game/GuessLogItem";
 
 interface GameScreenProps {
@@ -101,17 +101,18 @@ export default function GameScreen({
 
   const numberOfRounds = guessRounds.length;
 
+  //세로모드
   let content = (
     <>
       <NumberContainer>{currentGuess}</NumberContainer>
-  
+
       <Cards>
         <InstructionText>Higher or Lower?</InstructionText>
         <ButtonContainer>
           <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
             <Ionicons name="remove-outline" size={24} color="white" />
           </PrimaryButton>
-  
+
           <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
             <Ionicons name="add-outline" size={24} color="white" />
           </PrimaryButton>
@@ -119,33 +120,30 @@ export default function GameScreen({
       </Cards>
     </>
   );
-  
-  if (width > 500) {
+
+  //가로모드
+  if (width > height) {
     content = (
       <>
-      
         <View style={styles.buttonContainerWide}>
-          <ButtonContainer>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              <Ionicons name="remove-outline" size={24} color="white" />
-            </PrimaryButton>
-          </ButtonContainer>
-  
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+            <Ionicons name="remove-outline" size={24} color="white" />
+          </PrimaryButton>
+
           <NumberContainer>{currentGuess}</NumberContainer>
-  
-          <ButtonContainer>
-            <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
-              <Ionicons name="add-outline" size={24} color="white" />
-            </PrimaryButton>
-          </ButtonContainer>
+
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+            <Ionicons name="add-outline" size={24} color="white" />
+          </PrimaryButton>
         </View>
       </>
     );
   }
 
+  const marginTop = height < width ? "5%" : "10%";
 
   return (
-    <View style={styles.screen}>
+    <View style={[styles.screen, { marginTop: marginTop }]}>
       <Titles>Opponent's Guess</Titles>
       {content}
       <View style={styles.flatContainer}>
@@ -179,9 +177,11 @@ const styles = StyleSheet.create({
   },
 
   buttonContainerWide: {
-    width: "100%",
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-  }
+    borderWidth: 1,
+    borderColor: "yellow",
+  },
 });

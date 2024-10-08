@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { Colors } from "../../constants/colors";
 
 interface NumberContainerProps {
@@ -14,11 +8,13 @@ interface NumberContainerProps {
 export default function NumberContainer({ children }: NumberContainerProps) {
   const { width, height } = useWindowDimensions();
 
-  const isWideView = width > 380;
+  const isWideView = width > height;
 
   return (
-    <View style={[styles.container, isWideView && styles.containerWide]}>
-      <Text style={[styles.numberText, isWideView && styles.numberWide]}>{children}</Text>
+    <View style={isWideView ? styles.containerWide : styles.container}>
+      <Text style={[styles.numberText, isWideView && styles.numberWide]}>
+        {children}
+      </Text>
     </View>
   );
 }
@@ -28,17 +24,26 @@ export default function NumberContainer({ children }: NumberContainerProps) {
 
 const styles = StyleSheet.create({
   container: {
+    aspectRatio: 1,
     borderWidth: 4,
     borderColor: Colors.p500,
     borderRadius: 8,
     padding: 12,
+    margin: 12,
+    marginBottom: 24,
     justifyContent: "center",
     alignContent: "center",
   },
 
   containerWide: {
-    padding: 24,
-    margin: 30,
+    aspectRatio: 1,
+    borderWidth: 4,
+    borderColor: Colors.p500,
+    borderRadius: 8,
+    padding: 12,
+    margin: 12,
+    justifyContent: "center",
+    alignContent: "center",
   },
 
   numberText: {
@@ -48,8 +53,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  numberWide : {
-    fontSize: 36, 
-  }
-
+  numberWide: {
+    fontSize: 36,
+  },
 });
